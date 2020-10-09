@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost'
+import gql from "graphql-tag"
 
 
 export const restaurantQuery = gql`
@@ -11,3 +11,23 @@ export const restaurantQuery = gql`
     }
   }
 `;
+
+//
+// export const restaurantFetch = gql`
+//   query FetchRestaurants($first: Int, $after: String) {
+//     restaurants(first: $first, after: $after) {
+//       pageInfo {
+//         endCursor
+//         startCursor
+//         hasPreviousPage
+//         hasNextPage
+//       }
+//       nodes {
+//         name
+//         borough
+//         cuisine
+//         restaurant_id
+//       }
+//     }
+//   }
+// `

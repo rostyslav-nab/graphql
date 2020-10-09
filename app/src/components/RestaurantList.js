@@ -1,29 +1,44 @@
 import React from "react"
-import InfiniteScroll from "react-infinite-scroll-component"
+//import InfiniteScroll from "react-infinite-scroll-component"
+import InfiniteScroll from 'react-infinite-scroller'
 import {restaurantQuery} from "./queries"
 import {useQuery} from "@apollo/client"
 
 const RestaurantList = (props) => {
+    const {loading, error, data} = useQuery(restaurantQuery)
+    if (loading) return <p>Loading...</p>;
 
-    const { loading, error, data } = useQuery(restaurantQuery)
-    console.log(data)
-
-
-
-    const uploadNextRestaurants = () => {
-        console.log('Upload New DAta')
+    const handleLoadMore = () => {
+        // fetchMore({
+        //     variables: {
+        //         after: pageInfo.endCursor,
+        //         first: DEFAULT_PAGE_SIZE,
+        //     },
+        //     updateQuery(previousResult, { fetchMoreResult }) {
+        //         const connection = fetchMoreResult.restaurants;
+        //
+        //         return {
+        //             restaurants: {
+        //                 pageInfo: connection.pageInfo,
+        //                 nodes: [...previousResult.restaurants.nodes, ...connection.nodes],
+        //                 __typename: previousResult.restaurants.__typename,
+        //             },
+        //         };
+        //     },
+        // });
     }
 
-    if (loading) return <h1>'Loading...'</h1>
-    if (error) return `Error! ${error.message}`
+
     return (
+
         <InfiniteScroll
             dataLength={data.restaurants.length}
-            next={uploadNextRestaurants}
+            next={handleLoadMore}
             hasMore={true}
             loader={<h4>Please wait...</h4>}
         >
-            {data.restaurants.map((rest) => (
+            {data.restaurants &&
+            data.restaurants.map((rest) => (
                 <div key={rest.restaurant_id}>
                     <div>
                         <p>{rest.name}</p>

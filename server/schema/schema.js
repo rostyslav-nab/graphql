@@ -16,7 +16,7 @@ const RestaurantType = new GraphQLObjectType({
         name: { type: GraphQLString },
         borough: { type: GraphQLString },
         cuisine: { type: GraphQLString },
-        restaurant_id: { type: GraphQLID },
+        restaurant_id: { type: GraphQLString },
     }),
 });
 
